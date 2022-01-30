@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using GuestBookLibrary.Models;
 
 namespace ConsoleUI
@@ -16,31 +17,28 @@ namespace ConsoleUI
             {
                 GuestModel guest = new GuestModel();
 
+
+                guest.FirstName = GetInfoFromConsole("What is your first name? ");
+                guest.LastName = GetInfoFromConsole("What is your last name? ");
+                guest.MessageToHost = GetInfoFromConsole("What is your message to the host? ");
+                endRSVP = GetInfoFromConsole("Would you like to add another RSVP for the party? (yes/no) ");
                 
-
-                Console.Write("What is your first name? ");
-                string userInput = Console.ReadLine();
-                guest.FirstName = userInput;
-
-
-                Console.Write("What is your last name? ");
-                userInput = Console.ReadLine();
-                guest.LastName = userInput;
-
-
-                Console.Write("What is your message to the host? ");
-                userInput = Console.ReadLine();
-                guest.MessageToHost = userInput;
-
-                Console.Write("Would you like to add another RSVP for the party? (yes/no) ");
-                endRSVP = Console.ReadLine();
-
                 guests.Add(guest);
 
                 Console.Clear();
 
 
             } while (endRSVP.ToLower() != "no");
+        }
+
+        public static string GetInfoFromConsole(string message)
+        {
+            string output = "";
+
+            Console.Write(message);
+            output = Console.ReadLine();
+
+            return output;
         }
     }
 }
